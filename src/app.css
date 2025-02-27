@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Lato:wght@300;400;700&display=swap');
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  /* светлая тема */
+  --primary: #8A63D2;
+  /* Фиолетовый акцент */
+  --secondary: #FF7E5F;
+  /* Коралловый акцент */
+  --background: #F9F9FF;
+  /* Светлый фоновый цвет */
+  --surface: #FFFFFF;
+  /* Цвет поверхностей */
+  --text: #2A2A2A;
+  /* Основной текст */
+  --accent: #6DDBEC;
+  /* Акцентный бирюзовый */
+  --error: #FF5252;
+  /* Цвет ошибок */
+
+  /* темная тема */
+  --primary-dark: #A78BFA;
+  --secondary-dark: #FF9F7E;
+  --background-dark: #221931;
+  /* Глубокий темный фон */
+  --surface-dark: #342b3b;
+  /* Поверхности с легким контрастом */
+  --text-dark: #f1f5f7;
+  /* Мягкий белый текст */
+  --accent-dark: #7EE4F5;
+  --error-dark: #FF6B6B;
+
+  /* Общие настройки */
+  --border-radius: 12px;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --font-heading: 'Inter', sans-serif;
+  /* Современный шрифт */
+  --font-body: 'Inter', sans-serif;
+}
+
+/* Темная тема:
+Переопределение переменных при наличии атрибута data-theme="dark"
+Плавное переключение цветовой схемы
+*/
+[data-theme='dark'] {
+  /* Основные цвета */
+  --primary: var(--primary-dark);
+  --secondary: var(--secondary-dark);
+  --background: var(--background-dark);
+  --surface: var(--surface-dark);
+  --text: var(--text-dark);
+  --accent: var(--accent-dark);
+  --error: var(--error-dark);
+
+  /* Специфичные эффекты для темной темы */
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+  /* Градиентные эффекты */
+  --gradient-primary: linear-gradient(135deg,
+      var(--primary) 0%,
+      var(--accent) 100%);
+
+  /* Эффекты стекла (glassmorphism) */
+  --glass-background: rgba(30, 30, 30, 0.25);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --backdrop-filter: blur(12px) saturate(180%);
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Карточка новости: */
+.news-item {
+  background: var(--surface);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  /* Легкий контур */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.feed-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--primary), var(--secondary));
+  /* Градиентная полоса слева */
+}
+
+/* заголовки */
+h3 {
+  font-family: var(--font-heading);
+  /* Специальный шрифт */
+  font-size: 1.8rem;
+  color: #5c4b6f;
+  /* Темно-фиолетовый */
+  margin: 0 0 1rem;
+  position: relative;
+  padding-left: 1rem;
+  /* Отступ для псевдоэлемента */
+}
+
+h3::before {
+  content: '✦';
+  /* Декоративный символ */
+  position: absolute;
+  left: -1.5rem;
+  color: var(--secondary);
+  /* Цвет из переменных */
+  font-size: 1.2rem;
+  top: 0.3rem;
+}
+
+/* мета информация */
+.meta {
+  display: flex;
+  /* Горизонтальное расположение */
+  gap: 1.5rem;
+  /* Расстояние между элементами */
+  align-items: center;
+  margin: 1rem 0;
+  font-size: 0.9em;
+  color: #8e7a9f;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+  position: relative;
+  /* Для анимации подчеркивания */
+  padding-bottom: 2px;
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--secondary);
+  transition: width 0.3s ease;
+  /* Анимированное подчеркивание */
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+/* контент статьи */
+.content {
+  color: #6e6e6e;
+  /* Серый текст */
+  line-height: 1.8;
+  margin: 1.5rem 0;
+  border-left: 3px solid var(--accent);
+  /* Акцентная полоса */
+  padding-left: 1rem;
+  /* Отступ от полосы */
+}
+
+button {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+  box-shadow: 0 4px 12px rgba(var(--primary), 0.3);
+}
+
+.glass-effect {
+  background: var(--glass-background);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--backdrop-filter);
+}
+
+/* Анимация переключения темы */
+html {
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
+}
+
+/* поле ввода*/
+input {
+  background: var(--background);
+  color: var(--text);
+  border: 2px solid var(--primary);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  /* Изменение цвета при фокусе */
+}
+
+.error {
+  background: #ffe9ec;
+  color: #d44d69;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+  border: 2px solid #ffb7c5;
+}
+
+/* Адаптивнось */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+    /* Уменьшение отступов */
+  }
+
+  .feed-item {
+    padding: 1.5rem;
+    /* Компактные карточки */
+    margin: 1rem 0;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    /* Меньшие заголовки */
+  }
+}
