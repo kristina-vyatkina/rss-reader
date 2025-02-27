@@ -1,12 +1,12 @@
 <script lang="ts">
+	import { settings } from '$lib/stores';
 	export let feedData: any[]; // Массив данных новостей
 	export let isLoading: boolean; // Флаг состояния загрузки
-	export let layout: 'vertical' | 'two-columns' | 'grid';
 	import NewsItem from '$lib/components/NewsItem.svelte';
 </script>
 
 {#if feedData.length > 0}
-	<div class="news-list {layout}">
+	<div class="news-list {$settings.layout}">
 		{#each feedData as item (item.link)}
 			<!--// Уникальный ключ для каждой новости-->
 			<NewsItem {item} />

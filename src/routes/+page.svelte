@@ -15,7 +15,6 @@
 	let feedData: any[] = []; // Хранилище распарсенных данных
 	let isLoading = false; // Флаг загрузки
 	let error = ''; // Сообщение об ошибке
-	let layout: 'vertical' | 'two-columns' | 'grid' = 'vertical';
 	let isOpen = false;
 	const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/'; // Прокси для обхода CORS
 
@@ -67,8 +66,8 @@
 <ThemeToggle />
 <RSSForm bind:url {isLoading} on:submit={loadRSS} />
 <ErrorMessage {error} />
-<NewsList {feedData} {isLoading} {layout} />
-<SettingsModal bind:isOpen bind:layout />
+<NewsList {feedData} {isLoading} />
+<SettingsModal bind:isOpen />
 <!--двухстороняя привязка-->
 <!--RSSForm принимает:
 Двухстороннюю привязку (bind:url) для ввода URL

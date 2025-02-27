@@ -1,21 +1,20 @@
 <script lang="ts">
+	import { settings } from '$lib/stores';
+	import { onMount } from 'svelte';
 	export let isOpen: boolean;
-	export let layout: 'vertical' | 'two-columns' | 'grid';
-	let showAnimations: boolean = true;
 
 	const handleClose = () => {
-		isOpen = false; // Меняем пропс напрямую
+		isOpen = false;
 	};
 
-	const toggleAnimations = () => {
+	onMount(() => {
 		const html = document.documentElement;
-		showAnimations = !showAnimations;
-		if (showAnimations) {
+		if ($settings.showAnimations) {
 			html.removeAttribute('data-no-animations');
 		} else {
 			html.setAttribute('data-no-animations', '');
 		}
-	};
+	});
 </script>
 
 {#if isOpen}
@@ -29,13 +28,13 @@
 			<div class="settings-group">
 				<h3>Расположение новостей</h3>
 				<div class="layout-options">
-					<label class:selected={layout === 'vertical'}>
-						<input type="radio" name="layout" value="vertical" bind:group={layout} />
+					<label class:selected={$settings.layout === 'vertical'}>
+						<input type="radio" name="layout" value="vertical" bind:group={$settings.layout} />
 						<span>📰 Вертикальный список</span>
 					</label>
 
-					<label class:selected={layout === 'grid'}>
-						<input type="radio" name="layout" value="grid" bind:group={layout} />
+					<label class:selected={$settings.layout === 'grid'}>
+						<input type="radio" name="layout" value="grid" bind:group={$settings.layout} />
 						<span>🧱 Сетка</span>
 					</label>
 				</div>
@@ -43,7 +42,7 @@
 
 			<div class="settings-group">
 				<label class="toggle">
-					<input type="checkbox" checked={showAnimations} on:click={toggleAnimations} />
+					<input type="checkbox" bind:checked={$settings.showAnimations} />
 					<span>🎬 Анимации элементов</span>
 				</label>
 			</div>
