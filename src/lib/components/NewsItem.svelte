@@ -6,6 +6,19 @@
 		description: string;
 		pubDate: string;
 	};
+
+	// Функция форматирования даты
+	function formatDate(dateString: string) {
+		const date = new Date(dateString);
+		const options: Intl.DateTimeFormatOptions = {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+			hour: 'numeric',
+			minute: 'numeric'
+		};
+		return date.toLocaleDateString('ru-RU', options); // Локаль ru-RU
+	}
 </script>
 
 <article class="news-item glass-effect news-item">
@@ -13,7 +26,7 @@
 		<h3>{item.title}</h3>
 		<!--Заголовок новости-->
 		<div class="meta">
-			<time datetime={item.pubDate}>{item.pubDate}</time>
+			<time datetime={item.pubDate}>{formatDate(item.pubDate)}</time>
 			<!--// Дата в машиночитаемом формате-->
 			<a href={item.link} target="_blank" rel="noopener">Читать полностью</a>
 			<!--// Внешняя ссылка-->
