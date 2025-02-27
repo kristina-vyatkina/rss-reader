@@ -68,10 +68,58 @@
   --backdrop-filter: blur(12px) saturate(180%);
 }
 
+[data-no-animations] * {
+  transition: all 0s !important;
+  transform: none !important;
+}
+
 body {
   background: var(--background);
   color: var(--text);
   min-height: 100vh;
+}
+
+.settings-btn {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.settings-btn:hover {
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* Анимации для списка новостей */
+.news-list.animations .news-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-list.animations .news-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
+
+/* Варианты отображения */
+.news-list.vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.news-list.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
 }
 
 /* Карточка новости: */
@@ -176,7 +224,6 @@ button {
   background: var(--gradient-primary);
   color: white;
   border: none;
-  padding: 12px 24px;
   border-radius: 8px;
   font-weight: 600;
   transition: all 0.3s ease;
@@ -224,20 +271,15 @@ input:focus {
 }
 
 /* Адаптивнось */
-@media (max-width: 768px) {
-  body {
-    padding: 1rem;
-    /* Уменьшение отступов */
-  }
 
-  .feed-item {
-    padding: 1.5rem;
-    /* Компактные карточки */
-    margin: 1rem 0;
-  }
 
-  h3 {
-    font-size: 1.5rem;
-    /* Меньшие заголовки */
-  }
+.feed-item {
+  padding: 1.5rem;
+  /* Компактные карточки */
+  margin: 1rem 0;
+}
+
+h3 {
+  font-size: 1.5rem;
+  /* Меньшие заголовки */
 }

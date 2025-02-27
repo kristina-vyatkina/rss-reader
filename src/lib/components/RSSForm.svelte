@@ -25,7 +25,8 @@
 	form {
 		display: flex;
 		gap: 1rem;
-		margin: 2rem 0;
+		margin-top: 4rem;
+		margin-bottom: 2rem;
 		max-width: 800px;
 		width: 100%;
 	}

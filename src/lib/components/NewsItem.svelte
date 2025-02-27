@@ -35,9 +35,6 @@
 		transition: transform 0.2s ease;
 	}
 
-	.news-item:hover {
-		transform: translateY(-3px);
-	}
 	time {
 		display: flex;
 		align-items: center;
